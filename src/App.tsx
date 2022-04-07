@@ -1,19 +1,22 @@
+import { Suspense } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
-import { LazyPage1, LazyPage2, LazyPage3 } from "./01-lazyload/routes"
+// import { LazyPage1, LazyPage2, LazyPage3 } from "./01-lazyload/routes"
 import Layout from "./components/layouts/Layout"
+import { routes } from "./routes/routes"
 
 function App() {
   return (
-    <>
+    <Suspense fallback={<span>Loading...</span>}>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="lazy1" element={<LazyPage1 />} />
-          <Route path="lazy2" element={<LazyPage2 />} />
-          <Route path="lazy3" element={<LazyPage3 />} />
-          <Route path="*" element={<Navigate to="/lazy1" replace />} />
+          {routes.map(({ path, Component }) => (
+            <Route key={path} path={path} element={<Component />} />
+          ))}
+
+          <Route path="*" element={<Navigate to={routes[0].to} replace />} />
         </Route>
       </Routes>
-    </>
+    </Suspense>
   )
 }
 
