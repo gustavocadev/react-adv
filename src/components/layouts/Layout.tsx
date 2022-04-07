@@ -9,26 +9,26 @@ const Layout = () => {
         <ul>
           <li>
             <NavLink
-              to="/"
+              to="/lazy1"
               className={({ isActive }) => (isActive ? "nav-active" : "")}
             >
-              Home
+              Lazy 1
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/about"
+              to="/lazy2"
               className={({ isActive }) => (isActive ? "nav-active" : "")}
             >
-              About
+              Lazy 2
             </NavLink>
           </li>
           <li>
             <NavLink
-              to="/users"
+              to="/lazy3"
               className={({ isActive }) => (isActive ? "nav-active" : "")}
             >
-              Users
+              Lazy 3
             </NavLink>
           </li>
         </ul>
