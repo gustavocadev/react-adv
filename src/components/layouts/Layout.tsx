@@ -12,7 +12,7 @@ const Layout = () => {
               to="/"
               className={({ isActive }) => (isActive ? "nav-active" : "")}
             >
-              Home
+              Shopping
             </NavLink>
           </li>
           <li>
