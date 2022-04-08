@@ -1,17 +1,19 @@
 import styles from "../styles/styles.module.css"
 import { useProduct } from "../hooks/useProduct"
-import { createContext, ReactNode } from "react"
+import { createContext, CSSProperties, ReactNode } from "react"
 import { Product, ProductContextType } from "../types/types"
 
 export const ProductContext = createContext({} as ProductContextType)
 const { Provider } = ProductContext
 
-export type PCardProps = {
+export type Props = {
   product: Product
   children?: ReactNode
+  className?: string
+  style?: CSSProperties
 }
 
-const ProductCard = ({ product, children }: PCardProps) => {
+const ProductCard = ({ product, children, className, style }: Props) => {
   const { counter, increaseBy } = useProduct()
 
   return (
@@ -22,7 +24,9 @@ const ProductCard = ({ product, children }: PCardProps) => {
         product,
       }}
     >
-      <div className={styles.productCard}>{children}</div>
+      <div className={`${styles.productCard} ${className}`} style={style}>
+        {children}
+      </div>
     </Provider>
   )
 }

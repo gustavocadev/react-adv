@@ -3,6 +3,7 @@ import ProductCard, {
   ProductImage,
   ProductTitle,
 } from "../components"
+import "../styles/custom-styles.css"
 
 const product = {
   id: crypto.randomUUID(),
@@ -12,7 +13,7 @@ const product = {
 
 const ShoppingPage = () => {
   return (
-    <>
+    <div>
       <h1>ShoppingPage</h1>
       <hr />
       <div
@@ -23,18 +24,36 @@ const ShoppingPage = () => {
         }}
       >
         <ProductCard product={product}>
-          <ProductCard.Image />
-          <ProductCard.Title title="hello world" />
-          <ProductCard.Buttons />
+          <ProductCard.Image className="custom-image" />
+          <ProductCard.Title className="text-white font-bold" />
+          <ProductCard.Buttons className="custom-buttons" />
         </ProductCard>
 
-        <ProductCard product={product}>
-          <ProductImage />
-          <ProductTitle title="hello world" />
-          <ProductButtons />
+        <ProductCard product={product} className="bg-dark text-white">
+          <ProductImage className="custom-image" />
+          <ProductTitle className="text-white font-bold" />
+          <ProductButtons className="custom-buttons" />
+        </ProductCard>
+
+        <ProductCard
+          product={product}
+          style={{
+            backgroundColor: "#61DAFB",
+          }}
+        >
+          <ProductImage
+            style={{ boxShadow: "10px 10px 10px rgba(0, 0, 0, 0.2)" }}
+          />
+          <ProductTitle style={{ fontWeight: "bold" }} />
+          <ProductButtons
+            style={{
+              display: "flex",
+              justifyContent: "end",
+            }}
+          />
         </ProductCard>
       </div>
-    </>
+    </div>
   )
 }
 export default ShoppingPage

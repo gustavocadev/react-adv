@@ -1,26 +1,23 @@
-import { ReactNode } from "react"
-import { PCardProps } from "../components/ProductCard"
-
-type ProductButtonsProps = {
-  increaseBy: (value: number) => void
-  counter: number
-}
+import type { Props as PCardProps } from "../components/ProductCard"
+import type { Props as ProductButtonsProps } from "../components/ProductButtons"
+import type { Props as ProductImageProps } from "../components/ProductImage"
+import type { Props as ProductTitleProps } from "../components/ProductTitle"
 
 export type Product = {
   id: string
-  title: string
   img?: string
+  title: string
 }
 
 export type ProductContextType = {
   counter: number
-  increaseBy: (value: number) => void
   product: Product
+  increaseBy: (value: number) => void
 }
 
 export type ProductCardCurrentProps = {
-  ({ product, children }: PCardProps): JSX.Element
-  Title: ({ title }: { title?: string }) => JSX.Element
-  Image: ({ img }: { img?: string }) => JSX.Element
-  Buttons: () => JSX.Element
+  Buttons: (props: ProductButtonsProps) => JSX.Element
+  Image: (props: ProductImageProps) => JSX.Element
+  Title: (props: ProductTitleProps) => JSX.Element
+  (props: PCardProps): JSX.Element
 }
