@@ -21,3 +21,12 @@ export type ProductCardCurrentProps = {
   Title: (props: ProductTitleProps) => JSX.Element
   (props: PCardProps): JSX.Element
 }
+
+export type onChangeArgs = {
+  product: Product
+  count: number
+}
+
+export type ProductInCart = Product & {
+  count: number
+}
