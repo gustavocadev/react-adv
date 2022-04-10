@@ -1,18 +1,27 @@
 import styles from "../styles/styles.module.css"
 import { useProduct } from "../hooks/useProduct"
 import { createContext, CSSProperties, ReactNode } from "react"
-import { onChangeArgs, Product, ProductContextType } from "../types/types"
+import {
+  InitialValues,
+  onChangeArgs,
+  Product,
+  ProductCardHandlers,
+  ProductContextType,
+} from "../types/types"
 
 export const ProductContext = createContext({} as ProductContextType)
 const { Provider } = ProductContext
 
 export type Props = {
   product: Product
-  children?: ReactNode
+  // children?: ReactNode
+  children: (args: ProductCardHandlers) => ReactNode
   className?: string
   style?: CSSProperties
   onChange?: (args: onChangeArgs) => void
   value?: number
+  initialValues?: InitialValues
+  maxCount?: number
 }
 
 const ProductCard = ({
@@ -22,8 +31,15 @@ const ProductCard = ({
   style,
   onChange,
   value,
+  initialValues,
 }: Props) => {
-  const { counter, increaseBy } = useProduct({ onChange, product, value })
+  const { counter, increaseBy, maxCount, isMaxCountReached, reset } =
+    useProduct({
+      onChange,
+      product,
+      value,
+      initialValues,
+    })
 
   return (
     <Provider
@@ -31,10 +47,19 @@ const ProductCard = ({
         counter,
         increaseBy,
         product,
+        maxCount,
       }}
     >
       <div className={`${styles.productCard} ${className}`} style={style}>
-        {children}
+        {children({
+          count: counter,
+          isMaxCountReached,
+          maxCount: initialValues?.maxCount,
+          product,
+
+          increaseBy,
+          reset,
+        })}
       </div>
     </Provider>
   )

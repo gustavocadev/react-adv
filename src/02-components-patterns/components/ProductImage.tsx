@@ -9,18 +9,18 @@ export type Props = {
   style?: CSSProperties
 }
 
-const ProductImage = ({ img, className, style }: Props) => {
+const ProductImage = ({ img = "", className, style }: Props) => {
   const { product } = useContext(ProductContext)
   let imgToShow = ""
   if (img) {
     imgToShow = img
   } else {
-    imgToShow = product.img!
+    imgToShow = product.img ?? noImage
   }
   return (
     <img
       alt="Product image"
-      src={imgToShow ?? noImage}
+      src={imgToShow}
       className={`${styles.productImg} ${className}`}
       style={style}
     />

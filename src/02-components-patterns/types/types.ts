@@ -13,6 +13,8 @@ export type ProductContextType = {
   counter: number
   product: Product
   increaseBy: (value: number) => void
+  initialValues?: InitialValues
+  maxCount?: number
 }
 
 export type ProductCardCurrentProps = {
@@ -29,4 +31,18 @@ export type onChangeArgs = {
 
 export type ProductInCart = Product & {
   count: number
+}
+
+export type InitialValues = {
+  count?: number
+  maxCount?: number
+}
+
+export type ProductCardHandlers = {
+  count: number
+  isMaxCountReached: boolean
+  maxCount?: number
+  product: Product
+  increaseBy: (value: number) => void
+  reset: () => void
 }
